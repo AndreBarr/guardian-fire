@@ -5,14 +5,26 @@ import (
 	"net/http"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	// Respond with "Hello, World!"
-	fmt.Fprintln(w, "Hello, World!")
+func serveHTML(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "index.html")
+}
+
+func fetchMessage(w http.ResponseWriter, r *http.Request) {
+	// Simulate fetching data
+	message := "This is a dynamic message fetched from the server!"
+	fmt.Fprint(w, message)
 }
 
 func main() {
+	// Serve static files (e.g., HTMX script)
+	fs := http.FileServer(http.Dir("./static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	// Register the handler function to the root URL path
-	http.HandleFunc("/", handler)
+	http.HandleFunc("/", serveHTML)
+
+	// Handle HTMX requests
+	http.HandleFunc("/fetch-message", fetchMessage)
 
 	// Start the server on port 8080
 	fmt.Println("Starting server at http://localhost:8080")

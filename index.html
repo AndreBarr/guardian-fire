@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>First html file being served with Go!</title>
+    <script type="module" src="/static/htmx.min.js"></script>
+  </head>
+  <body>
+    <div>Wow this is interesting, test</div>
+
+    <!-- Button to fetch data -->
+    <button hx-get="/fetch-message" hx-trigger="click" hx-target="#message">
+      Fetch Message
+    </button>
+
+    <!-- Placeholder for the dynamic message -->
+    <div id="message" style="margin-top: 20px; color: blue"></div>
+  </body>
+</html>
