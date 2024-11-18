@@ -3,10 +3,20 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"path/filepath"
 )
 
 func serveHTML(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "index.html")
+	// Ensure the request is for the correct path
+	if r.URL.Path != "/" {
+		http.Error(w, "Not found", http.StatusNotFound)
+		return
+	}
+	
+	// Construct the relative path to the HTML file
+	filePath := filepath.Join("templates", "home.html")
+
+	http.ServeFile(w, r, filePath)
 }
 
 func fetchMessage(w http.ResponseWriter, r *http.Request) {
