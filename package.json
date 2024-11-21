@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "go run main.go",
-    "copy:htmx": "cp node_modules/htmx.org/dist/htmx.min.js ./static/"
+    "copy:htmx": "cp node_modules/htmx.org/dist/htmx.min.js ./static/",
+    "css:watch": "npx tailwindcss -i ./styles.css -o ./static/output.css --watch"
   },
   "author": "",
   "license": "ISC",
